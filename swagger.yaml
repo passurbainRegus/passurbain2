@@ -119,7 +119,26 @@ definitions:
           id:
             type: integer
             format: int64
+  Service:
+    allOf:
+      - $ref: '#/definitions/NewService'
+      - required:
+        - id
+        properties:
+          id:
+            type: integer
+            format: int64
   NewPartenaire:
+    properties:
+      nom:
+        type: string
+      chapeau:
+        type: string
+      description:
+        type: string
+      service:
+        {$ref: '#/definitions/Service'}
+  NewService:
     required:
       - nom
     properties:
@@ -127,7 +146,7 @@ definitions:
         type: string
       chapeau:
         type: string
-      description:
+      adresse:
         type: string
   Error:
     required:
