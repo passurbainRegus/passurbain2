@@ -137,7 +137,7 @@ definitions:
       description:
         type: string
       service:
-        $ref: '#/definitions/Service'
+        {$ref: '#/definitions/Service'}
   NewService:
     required:
       - nom
