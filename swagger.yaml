@@ -164,7 +164,7 @@ definitions:
   NewHistorique:
     properties:
       serviceId:
-        type: integer
+        type: string
       date:
         type: string
   Error:
