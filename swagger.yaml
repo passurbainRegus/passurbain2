@@ -137,10 +137,10 @@ definitions:
       description:
         type: string
       service:
-        {$ref: '#/definitions/Service'}
+        type: array
+        items:
+          $ref: '#/definitions/Service'
   NewService:
-    required:
-      - nom
     properties:
       nom:
         type: string
