@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Liste d'usagers
+  description: Usager avec une liste de ses services associés
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /usagers:
+  /usager:
     get:
       description: |
-        Liste d'usagers
-      operationId: findListeUsagers
+        Returns all usagers from the system that the user has access to
+      operationId: findUsagers
       parameters:
         - name: tags
           in: query
@@ -42,7 +42,7 @@ paths:
           format: int32
       responses:
         200:
-          description: usagers response
+          description: usager response
           schema:
             type: array
             items:
@@ -52,13 +52,57 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates liste d'usagers in the store.
-      operationId: addListeUsagers
+      description: Creates a new usager.
+      operationId: addUsager
+      parameters:
+        - name: usager
+          in: body
+          description: Usager to add
+          required: true
+          schema:
+            $ref: '#/definitions/NewUsager'
       responses:
         200:
-          description: Usagers response
+          description: usager response
           schema:
             $ref: '#/definitions/Usager'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /usager_services/{id_usager}:
+    get:
+      description: Returns an usager avec ses services based on a single ID
+      operationId: find usager et ses services by id
+      parameters:
+        - name: id_usager
+          in: path
+          description: ID of usager to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: usager response
+          schema:
+            $ref: '#/definitions/Usager'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      description: deletes a single usager based on the ID supplied
+      operationId: deleteUsager
+      parameters:
+        - name: id_usager
+          in: path
+          description: ID of usager to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: usager deleted
         default:
           description: unexpected error
           schema:
@@ -97,6 +141,55 @@ definitions:
       adresse_postale_usager:
         type: string
       numero_telephone_usager:
+        type: string
+      services:
+        {$ref: '#/definitions/Service'}
+  Service:
+    allOf:
+      - $ref: '#/definitions/NewService'
+      - required:
+        - id_service
+        properties:
+          id_service:
+            type: integer
+            format: int64
+  NewService:
+    properties:
+      nom_service:
+        type: string
+      chapeau_service:
+        type: string
+      description_service:
+        type: string
+      logo_service:
+        type: string
+      telephone_sav_service:
+        type: string
+      adresse_email_sav_service:
+        type: string
+      url_sav_service:
+        type: string
+      adresse_email_support_service:
+        type: string
+      url_espace_client_service:
+        type: string
+      type_securite_service:
+        type: string
+      mode_appel_l2:
+        type: string
+      parametre_l2:
+        type: string
+      mode_appel_l3:
+        type: string
+      frequence_appel_l4:
+        type: string
+      mode_appel_l5:
+        type: string
+      parametre_l5:
+        type: string
+      frequence_appel_l5:
+        type: string
+      frequence_appel_l7:
         type: string
   Error:
     required:
