@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification
+  description: EJEMPLO DE UN OBJETO SIMPLE COMO ATRIBUTO DE OTRO OBJETO
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -128,15 +128,6 @@ definitions:
           id:
             type: integer
             format: int64
-  Historique:
-    allOf:
-      - $ref: '#/definitions/NewHistorique'
-      - required:
-        - id 
-        properties:
-          id:
-            type: integer
-            format: int64
   NewPartenaire:
     properties:
       nom:
@@ -146,26 +137,16 @@ definitions:
       description:
         type: string
       service:
-        type: array
-        items:
-          $ref: '#/definitions/Service'
+        {$ref: '#/definitions/Service'}
   NewService:
+    required:
+      - nom
     properties:
       nom:
         type: string
       chapeau:
         type: string
       adresse:
-        type: string
-      historique:
-        type: array
-        items:
-          $ref: '#/definitions/Historique'
-  NewHistorique:
-    properties:
-      serviceId:
-        type: integer
-      date:
         type: string
   Error:
     required:
