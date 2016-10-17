@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Liste de services
+  description: Agent
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /services:
+  /agent:
     get:
       description: |
-        Liste de services
-      operationId: findListeServices
+        Returns all agents from the system that the user has access to 
+      operationId: findUsager
       parameters:
         - name: tags
           in: query
@@ -42,74 +42,91 @@ paths:
           format: int32
       responses:
         200:
-          description: services response
+          description: agent response
           schema:
             type: array
             items:
-              $ref: '#/definitions/Service'
+              $ref: '#/definitions/Agent'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates liste de services in the store.
-      operationId: addListeServices
+      description: Creates a new agent.
+      operationId: addAgent
+      parameters:
+        - name: agent
+          in: body
+          description: Usager to add to the PU
+          required: true
+          schema:
+            $ref: '#/definitions/NewAgent'
       responses:
         200:
-          description: Services response
+          description: agent response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Agent'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /agent/{id_agent}:
+    get:
+      description: Returns an agent based on a single ID, if the user does not have access to the usager
+      operationId: find agent by id_agent
+      parameters:
+        - name: id_agent
+          in: path
+          description: ID of agent to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: agent response
+          schema:
+            $ref: '#/definitions/Agent'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      description: deletes a single agent based on the ID supplied
+      operationId: deleteAgent by id_agent
+      parameters:
+        - name: id_agent
+          in: path
+          description: ID of agent to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: agent deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Service:
+  Agent:
     allOf:
-      - $ref: '#/definitions/NewService'
+      - $ref: '#/definitions/NewAgent'
       - required:
-        - id_service
+        - id_agent
         properties:
-          id_service:
+          id_agent:
             type: integer
             format: int64
-  NewService:
+  NewAgent:
     properties:
-      nom_service:
+      id_CUT_agent:
+        type: integer
+        format: int64
+      nom_agent:
         type: string
-      chapeau_service:
+      prenom_agent:
         type: string
-      description_service:
-        type: string
-      logo_service:
-        type: string
-      telephone_sav_service:
-        type: string
-      adresse_email_sav_service:
-        type: string
-      url_sav_service:
-        type: string
-      adresse_email_support_service:
-        type: string
-      url_espace_client_service:
-        type: string
-      type_securite_service:
-        type: string
-      mode_appel_l2:
-        type: string
-      parametre_l2:
-        type: string
-      mode_appel_l3:
-        type: string
-      frequence_appel_l4:
-        type: string
-      mode_appel_l5:
-        type: string
-      parametre_l5:
-        type: string
-      frequence_appel_l5:
-        type: string
-      frequence_appel_l7:
+      adresse_email_agent:
         type: string
   Error:
     required:
