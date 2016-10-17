@@ -24,7 +24,7 @@ paths:
     get:
       description: |
         Object usager  
-      operationId: findPets
+      operationId: findUsager
       parameters:
         - name: tags
           in: query
