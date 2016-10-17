@@ -143,7 +143,9 @@ definitions:
       numero_telephone_usager:
         type: string
       services:
-        {$ref: '#/definitions/Service'}
+        type: array
+        items:
+          $ref: '#/definitions/Service'
   Service:
     allOf:
       - $ref: '#/definitions/NewService'
