@@ -114,7 +114,7 @@ definitions:
       - required:
         - id_partenaire
         properties:
-          id_agent:
+          id_partenaire:
             type: integer
             format: int64
   NewPartenaire:
