@@ -70,7 +70,7 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /usager_historiques/{id_usager}:
+  /usager_services_hu/{id_usager}:
     get:
       description: Returns an usager avec ses historiques based on a single ID
       operationId: find usager et ses historiques by id
