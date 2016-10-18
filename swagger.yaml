@@ -138,7 +138,21 @@ definitions:
         type: string
       type_securite_service_hs:
         type: string
-      mode_appel_l2_hu:
+      mode_appel_l2_hs:
+        type: string
+      parametre_l2_hs:
+        type: string
+      mode_appel_l3_hs:
+        type: string
+      frequence_appel_l4_hs:
+        type: string
+      mode_appel_l5_hs:
+        type: string
+      parametre_l5_hs:
+        type: string
+      frequence_appel_l5_hs:
+        type: string
+      frequence_appel_l7_hs:
         type: string
   Error:
     required:
