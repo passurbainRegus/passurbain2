@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Service
+  description: Usager avec une liste de ses historiques
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /service:
+  /usager:
     get:
       description: |
-        Returns all services from the system that the user has access to
-      operationId: findService
+        Returns all usagers from the system that the user has access to
+      operationId: findUsagers
       parameters:
         - name: tags
           in: query
@@ -42,72 +42,151 @@ paths:
           format: int32
       responses:
         200:
-          description: service response
+          description: usager response
           schema:
             type: array
             items:
-              $ref: '#/definitions/Service'
+              $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new service.
-      operationId: addService
+      description: Creates a new usager.
+      operationId: addUsager
       parameters:
-        - name: service
+        - name: usager
           in: body
-          description: service to add to the PU
+          description: Usager to add
           required: true
           schema:
-            $ref: '#/definitions/NewService'
+            $ref: '#/definitions/NewUsager'
       responses:
         200:
-          description: service response
+          description: usager response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /service_historiques/{id_service}:
+  /usager_historiques/{id_usager}:
     get:
-      description: Returns a service based on a single ID, if the user does not have access to the service
-      operationId: find service by id_service
+      description: Returns an usager avec ses historiques based on a single ID
+      operationId: find usager et ses historiques by id
       parameters:
-        - name: id_service
+        - name: id_usager
           in: path
-          description: ID of service to fetch
+          description: ID of usager to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: service response
+          description: usager response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single service based on the ID supplied
-      operationId: deleteService by id_service
+      description: deletes a single usager based on the ID supplied
+      operationId: deleteUsager
       parameters:
-        - name: id_service
+        - name: id_usager
           in: path
-          description: ID of service to delete
+          description: ID of usager to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: service deleted
+          description: usager deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
+  Usager:
+    allOf:
+      - $ref: '#/definitions/NewUsager'
+      - required:
+        - id_usager
+        properties:
+          id_usager:
+            type: integer
+            format: int64
+  NewUsager:
+    properties:
+      id_CUT_usager:
+        type: integer
+        format: int64
+      nom_usager:
+        type: string
+      prenom_usager:
+        type: string
+      adresse_email_usager:
+        type: string
+      sexe_usager:
+        type: string
+      date_naissance_usager:
+        type: string
+      lieu_naissance_usager:
+        type: string
+      pays_naissance_usager:
+        type: string
+      nom_usage_usager:
+        type: string
+      adresse_postale_usager:
+        type: string
+      numero_telephone_usager:
+        type: string
+      services:
+        type: array
+        items:
+          $ref: '#/definitions/Service'
+      historiques_usager:
+        type: array
+        items:
+          $ref: '#/definitions/HistoriqueUsager'
+  HistoriqueUsager:
+    allOf:
+      - $ref: '#/definitions/NewHistoriqueUsager'
+      - required:
+        - id_hu
+        properties:
+          id_hu:
+            type: integer
+            format: int64
+  NewHistoriqueUsager:
+    properties:
+      id_usager_hu:
+        type: integer
+        format: int64
+      id_CUT_usager_hu:
+        type: integer
+        format: int64
+      no_usager_hu:
+        type: string
+      prenom_usager_hu:
+        type: string
+      adresse_email_usager_hu:
+        type: string
+      sece_usager_hu:
+        type: string
+      date_naissance_usager_hu:
+        type: string
+      lieu_naissance_usager_hu_:
+        type: string
+      pays_naissance_usager_hu:
+        type: string
+      nom_usage_usager_hu:
+        type: string
+      adresse_postale_usager_hu:
+        type: string
+      numero_telephone_usager_hu:
+        type: string  
   Service:
     allOf:
       - $ref: '#/definitions/NewService'
@@ -154,56 +233,6 @@ definitions:
       frequence_appel_l5:
         type: string
       frequence_appel_l7:
-        type: string
-      historiques_service:
-        type: array
-        items:
-          $ref: '#/definitions/HistoriqueService'
-  HistoriqueService:
-    allOf:
-      - $ref: '#/definitions/NewHistoriqueService'
-      - required:
-        - id_hs
-        properties:
-          id_hs:
-            type: integer
-            format: int64
-  NewHistoriqueService:
-    properties:
-      id_service_hs:
-        type: integer
-        format: int64
-      nom_service_hs:
-        type: string
-      chapeau_service_hs:
-        type: string
-      description_service_hs:
-        type: string
-      logo_service_hs:
-        type: string
-      telephone_sav_service_hs:
-        type: string
-      adresse_email_sav_service_hs:
-        type: string
-      url_espace_client_service_hs:
-        type: string
-      type_securite_service_hs:
-        type: string
-      mode_appel_l2_hs:
-        type: string
-      parametre_l2_hs:
-        type: string
-      mode_appel_l3_hs:
-        type: string
-      frequence_appel_l4_hs:
-        type: string
-      mode_appel_l5_hs:
-        type: string
-      parametre_l5_hs:
-        type: string
-      frequence_appel_l5_hs:
-        type: string
-      frequence_appel_l7_hs:
         type: string
   Error:
     required:
