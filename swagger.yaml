@@ -234,6 +234,56 @@ definitions:
         type: string
       frequence_appel_l7:
         type: string
+      historiques_service:
+        type: array
+        items:
+          $ref: '#/definitions/HistoriqueService'
+  HistoriqueService:
+    allOf:
+      - $ref: '#/definitions/NewHistoriqueService'
+      - required:
+        - id_hs
+        properties:
+          id_hs:
+            type: integer
+            format: int64
+  NewHistoriqueService:
+    properties:
+      id_service_hs:
+        type: integer
+        format: int64
+      nom_service_hs:
+        type: string
+      chapeau_service_hs:
+        type: string
+      description_service_hs:
+        type: string
+      logo_service_hs:
+        type: string
+      telephone_sav_service_hs:
+        type: string
+      adresse_email_sav_service_hs:
+        type: string
+      url_espace_client_service_hs:
+        type: string
+      type_securite_service_hs:
+        type: string
+      mode_appel_l2_hs:
+        type: string
+      parametre_l2_hs:
+        type: string
+      mode_appel_l3_hs:
+        type: string
+      frequence_appel_l4_hs:
+        type: string
+      mode_appel_l5_hs:
+        type: string
+      parametre_l5_hs:
+        type: string
+      frequence_appel_l5_hs:
+        type: string
+      frequence_appel_l7_hs:
+        type: string
   Error:
     required:
       - code
