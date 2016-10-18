@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Liste de partenaires
+  description: Liste des Historique_Service's
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /partenaire:
+  /historique_service:
     get:
       description: |
-        Returns all partenaire from the system that the user has access to 
-      operationId: findPartenaire
+        Returns all historique_service's from the system that the user has access to 
+      operationId: findHistorique_Service
       parameters:
         - name: tags
           in: query
@@ -42,51 +42,80 @@ paths:
           format: int32
       responses:
         200:
-          description: partenaire response
+          description: historique_service response
           schema:
             type: array
             items:
-              $ref: '#/definitions/Partenaire'
+              $ref: '#/definitions/HistoriqueService'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new partenaire.
-      operationId: addPartenaire
+      description: Creates a new historique_service.
+      operationId: addHistoriqueService
       parameters:
-        - name: partenaire
+        - name: historique_service
           in: body
-          description: Partenaire to add to the PU
+          description: HistoriqueService to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewPartenaire'
+            $ref: '#/definitions/NewHistoriqueService'
       responses:
         200:
-          description: partenaire response
+          description: historique_service response
           schema:
-            $ref: '#/definitions/Partenaire'
+            $ref: '#/definitions/HistoriqueService'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Partenaire:
+  HistoriqueService:
     allOf:
-      - $ref: '#/definitions/NewPartenaire'
+      - $ref: '#/definitions/NewHistoriqueService'
       - required:
-        - id_partenaire
+        - id_hs
         properties:
-          id_partenaire:
+          id_hs:
             type: integer
             format: int64
-  NewPartenaire:
+  NewHistoriqueService:
     properties:
-      nom_partenaire:
+      id_service_hs:
+        type: integer
+        format: int64
+      nom_service_hs:
         type: string
-      chapeau_partenaire:
+      chapeau_service_hs:
         type: string
-      description_partenaire:
+      description_service_hs:
+        type: string
+      logo_service_hs:
+        type: string
+      telephone_sav_service_hs:
+        type: string
+      adresse_email_sav_service_hs:
+        type: string
+      url_espace_client_service_hs:
+        type: string
+      type_securite_service_hs:
+        type: string
+      mode_appel_l2_hs:
+        type: string
+      parametre_l2_hs:
+        type: string
+      mode_appel_l3_hs:
+        type: string
+      frequence_appel_l4_hs:
+        type: string
+      mode_appel_l5_hs:
+        type: string
+      parametre_l5_hs:
+        type: string
+      frequence_appel_l5_hs:
+        type: string
+      frequence_appel_l7_hs:
         type: string
   Error:
     required:
