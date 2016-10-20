@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Historique Usager
+  description: Solde
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /historique_usager:
+  /solde:
     get:
       description: |
-        Returns all historique_usager's from the system that the user has access to 
-      operationId: findHistorique_Usager
+        Returns all soldes from the system that the user has access to 
+      operationId: findUsager
       parameters:
         - name: tags
           in: query
@@ -42,108 +42,90 @@ paths:
           format: int32
       responses:
         200:
-          description: historique_usager response
+          description: solde response
           schema:
             type: array
             items:
-              $ref: '#/definitions/HistoriqueUsager'
+              $ref: '#/definitions/Solde'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new historique_usager.
-      operationId: addHistoriqueUsager
+      description: Creates a new solde.
+      operationId: addSolde
       parameters:
-        - name: historique_usager
+        - name: solde
           in: body
-          description: HistoriqueUsager to add to the PU
+          description: Solde to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewHistoriqueUsager'
+            $ref: '#/definitions/NewSolde'
       responses:
         200:
-          description: historique_usager response
+          description: solde response
           schema:
-            $ref: '#/definitions/HistoriqueUsager'
+            $ref: '#/definitions/Solde'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /historique_usager/{id_hu}:
+  /solde/{id_solde}:
     get:
-      description: Returns a historique_usager based on a single ID
-      operationId: find historique_usager by id_hu
+      description: Returns a solde based on a single ID, if the user does not have access to the usager
+      operationId: find solde by id_solde
       parameters:
-        - name: id_hu
+        - name: id_solde
           in: path
-          description: ID of historique_usager to fetch
+          description: ID of solde to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: historique_usager response
+          description: solde response
           schema:
-            $ref: '#/definitions/HistoriqueUsager'
+            $ref: '#/definitions/Solde'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single historique_usager based on the ID supplied
-      operationId: deleteHistoriqueUsager by id_hu
+      description: deletes a single solde based on the ID supplied
+      operationId: deleteSolde by id_solde
       parameters:
-        - name: id_hu
+        - name: id_solde
           in: path
-          description: ID of historique_usager to delete
+          description: ID of solde to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: historique_usager deleted
+          description: solde deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  HistoriqueUsager:
+  Solde:
     allOf:
-      - $ref: '#/definitions/NewHistoriqueUsager'
+      - $ref: '#/definitions/NewSolde'
       - required:
-        - id_hu
+        - id_solde
         properties:
-          id_hu:
+          id_solde:
             type: integer
             format: int64
-  NewHistoriqueUsager:
+  NewSolde:
     properties:
-      id_usager_hu:
-        type: integer
-        format: int64
-      id_CUT_usager_hu:
-        type: integer
-        format: int64
-      no_usager_hu:
+      libelle_solde:
         type: string
-      prenom_usager_hu:
+      valeur_solde:
         type: string
-      adresse_email_usager_hu:
+      lien_solde:
         type: string
-      sece_usager_hu:
-        type: string
-      date_naissance_usager_hu:
-        type: string
-      lieu_naissance_usager_hu_:
-        type: string
-      pays_naissance_usager_hu:
-        type: string
-      nom_usage_usager_hu:
-        type: string
-      adresse_postale_usager_hu:
-        type: string
-      numero_telephone_usager_hu:
+      date_creation_solde:
         type: string
   Error:
     required:
