@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Agent
+  description: Partenaire
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /agent:
+  /partenaire:
     get:
       description: |
-        Returns all agents from the system that the user has access to 
-      operationId: findUsager
+        Returns all partenaire from the system that the user has access to 
+      operationId: findPartenaire
       parameters:
         - name: tags
           in: query
@@ -42,91 +42,88 @@ paths:
           format: int32
       responses:
         200:
-          description: agent response
+          description: partenaire response
           schema:
             type: array
             items:
-              $ref: '#/definitions/Agent'
+              $ref: '#/definitions/Partenaire'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new agent.
-      operationId: addAgent
+      description: Creates a new partenaire.
+      operationId: addPartenaire
       parameters:
-        - name: agent
+        - name: partenaire
           in: body
-          description: Usager to add to the PU
+          description: Partenaire to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewAgent'
+            $ref: '#/definitions/NewPartenaire'
       responses:
         200:
-          description: agent response
+          description: partenaire response
           schema:
-            $ref: '#/definitions/Agent'
+            $ref: '#/definitions/Partenaire'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /agent/{id_agent}:
+  /partenaire/{id_partenaire}:
     get:
-      description: Returns an agent based on a single ID, if the user does not have access to the usager
-      operationId: find agent by id_agent
+      description: Returns a partenaire based on a single ID
+      operationId: find partenaire by id_partenaire
       parameters:
-        - name: id_agent
+        - name: id_partenaire
           in: path
-          description: ID of agent to fetch
+          description: ID of partenaire to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: agent response
+          description: partenaire response
           schema:
-            $ref: '#/definitions/Agent'
+            $ref: '#/definitions/Partenaire'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single agent based on the ID supplied
-      operationId: deleteAgent by id_agent
+      description: deletes a single partenaire based on the ID supplied
+      operationId: deletePartenaire by id_partenaire
       parameters:
-        - name: id_agent
+        - name: id_partenaire
           in: path
-          description: ID of agent to delete
+          description: ID of partenaire to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: agent deleted
+          description: partenaire deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Agent:
+  Partenaire:
     allOf:
-      - $ref: '#/definitions/NewAgent'
+      - $ref: '#/definitions/NewPartenaire'
       - required:
-        - id_agent
+        - id_partenaire
         properties:
-          id_agent:
+          id_partenaire:
             type: integer
             format: int64
-  NewAgent:
+  NewPartenaire:
     properties:
-      id_CUT_agent:
-        type: integer
-        format: int64
-      nom_agent:
+      nom_partenaire:
         type: string
-      prenom_agent:
+      chapeau_partenaire:
         type: string
-      adresse_email_agent:
+      description_partenaire:
         type: string
   Error:
     required:
