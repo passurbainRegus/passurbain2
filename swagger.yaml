@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: (Referentiel) Etat adhesion
+  description: (Referentiel) Etat agent
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /ref_etat_adhesion:
+  /ref_etat_agent:
     get:
       description: |
-        Returns all etats adhesions from the system that the user has access to 
-      operationId: findEtatAdhesion
+        Returns all etats agents from the system that the user has access to 
+      operationId: findEtatAgent
       parameters:
         - name: tags
           in: query
@@ -42,40 +42,40 @@ paths:
           format: int32
       responses:
         200:
-          description: etat adhesion response
+          description: etat agent response
           schema:
             type: array
             items:
-              $ref: '#/definitions/EtatAdhesion'
+              $ref: '#/definitions/EtatAgent'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new etat adhesion.
+      description: Creates a new etat agent.
       operationId: addEtatUsager
       parameters:
-        - name: etat adhesion
+        - name: etat agent
           in: body
           description: EtatUsager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewEtatAdhesion'
+            $ref: '#/definitions/NewEtatAgent'
       responses:
         200:
-          description: etat adhesion response
+          description: etat agent response
           schema:
-            $ref: '#/definitions/EtatAdhesion'
+            $ref: '#/definitions/EtatAgent'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /ref_etat_adhesion/{id_etat_adhesion}:
+  /ref_etat_agent/{id_etat_agent}:
     get:
-      description: Returns an etat adhesion based on a single ID
-      operationId: find etat adhesion by id_etat_adhesion
+      description: Returns an etat agent based on a single ID
+      operationId: find etat agent by id_etat_agent
       parameters:
-        - name: id_etat_adhesion
+        - name: id_etat_agent
           in: path
           description: ID of etat usager to fetch
           required: true
@@ -83,43 +83,43 @@ paths:
           format: int64
       responses:
         200:
-          description: adhesion response
+          description: agent response
           schema:
-            $ref: '#/definitions/EtatAdhesion'
+            $ref: '#/definitions/EtatAgent'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single etat adhesion based on the ID supplied
-      operationId: deleteEtatUsager by id_etat_adhesion
+      description: deletes a single etat agent based on the ID supplied
+      operationId: deleteEtatUsager by id_etat_agent
       parameters:
-        - name: id_etat_adhesion
+        - name: id_etat_agent
           in: path
-          description: ID of etat adhesion to delete
+          description: ID of etat agent to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: etat adhesion deleted
+          description: etat agent deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  EtatAdhesion:
+  EtatAgent:
     allOf:
-      - $ref: '#/definitions/NewEtatAdhesion'
+      - $ref: '#/definitions/NewEtatAgent'
       - required:
-        - id_etat_adhesion
+        - id_etat_agent
         properties:
-          id_etat_adhesion:
+          id_etat_agent:
             type: integer
             format: int64
-  NewEtatAdhesion:
+  NewEtatAgent:
     properties:
-      libelle_etat_adhesion:
+      libelle_etat_agent:
         type: string
   Error:
     required:
