@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Demande support
+  description: Historique Adhesion
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /demande_support:
+  /historique_adhesion:
     get:
       description: |
-        Returns all demandes supports from the system that the user has access to 
-      operationId: findDemandeSupport
+        Returns all historique adhesions from the system that the user has access to 
+      operationId: findHistoriqueAdhesion
       parameters:
         - name: tags
           in: query
@@ -42,84 +42,87 @@ paths:
           format: int32
       responses:
         200:
-          description: demande support response
+          description: demande historique adhesion response
           schema:
             type: array
             items:
-              $ref: '#/definitions/DemandeSupport'
+              $ref: '#/definitions/HistoriqueAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new demande support.
-      operationId: addDemandeSupport
+      description: Creates a new historique adhesion.
+      operationId: addHistoriqueAdhesion
       parameters:
-        - name: demande support
+        - name: demande historique adhesion
           in: body
-          description: DemandeSupport to add to the PU
+          description: HistoriqueAdhesionto add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewDemandeSupport'
+            $ref: '#/definitions/NewHistoriqueAdhesion'
       responses:
         200:
           description: demande support response
           schema:
-            $ref: '#/definitions/DemandeSupport'
+            $ref: '#/definitions/HistoriqueAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /demande_support/{id_demande_support}:
+  /historique adhesion/{id_ha}:
     get:
-      description: Returns an demande support based on a single ID
-      operationId: find demande support by id_demande_support
+      description: Returns an historique adhesion support based on a single ID
+      operationId: find historique adhesion by id_ha
       parameters:
-        - name: id_demande_support
+        - name: id_ha
           in: path
-          description: ID of demande support to fetch
+          description: ID of historique adhesion to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: demande support response
+          description: historique adhesion response
           schema:
-            $ref: '#/definitions/DemandeSupport'
+            $ref: '#/definitions/HistoriqueAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single demande support based on the ID supplied
-      operationId: deleteDemandeSupport by id_demande_support
+      description: deletes a single historique adhesion based on the ID supplied
+      operationId: deleteHistoriqueAdhesion by id_ha
       parameters:
-        - name: id_demande_support
+        - name: id_ha
           in: path
-          description: ID of demande support to delete
+          description: ID of historique adhesion to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: demande support deleted
+          description: historique adhesion deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  DemandeSupport:
+  HistoriqueAdhesion:
     allOf:
-      - $ref: '#/definitions/NewDemandeSupport'
+      - $ref: '#/definitions/NewHistoriqueAdhesion'
       - required:
-        - id_demande_support
+        - id_ha
         properties:
-          id_support:
+          id_ha:
             type: integer
             format: int64
-  NewDemandeSupport:
+  NewHistoriqueAdhesion:
     properties:
-      date_creation_support:
+      id_adhesion_ha:
+        type: integer
+        format: int64
+      date_adhesion_ha:
         type: string
   Error:
     required:
