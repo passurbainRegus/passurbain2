@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Historique Adhesion
+  description: Famille
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /historique_adhesion:
+  /famille:
     get:
       description: |
-        Returns all historique adhesions from the system that the user has access to 
-      operationId: findHistoriqueAdhesion
+        Returns all familles from the system that the user has access to 
+      operationId: findFamille
       parameters:
         - name: tags
           in: query
@@ -42,88 +42,82 @@ paths:
           format: int32
       responses:
         200:
-          description: historique adhesion response
+          description: famille response
           schema:
             type: array
             items:
-              $ref: '#/definitions/HistoriqueAdhesion'
+              $ref: '#/definitions/Famille'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new historique adhesion.
-      operationId: addHistoriqueAdhesion
+      description: Creates a new famille.
+      operationId: addFamille
       parameters:
-        - name: historique adhesion
+        - name: famille
           in: body
-          description: HistoriqueAdhesion to add to the PU
+          description: Famille to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewHistoriqueAdhesion'
+            $ref: '#/definitions/NewFamille'
       responses:
         200:
-          description: support response
+          description: famille response
           schema:
-            $ref: '#/definitions/HistoriqueAdhesion'
+            $ref: '#/definitions/Famille'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /historique adhesion/{id_ha}:
+  /famille/{id_famille}:
     get:
-      description: Returns an historique adhesion based on a single ID
-      operationId: find historique adhesion by id_ha
+      description: Returns an famille based on a single ID
+      operationId: find famille by id_famille
       parameters:
-        - name: id_ha
+        - name: id_famille
           in: path
-          description: ID of historique adhesion to fetch
+          description: ID of famille to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: historique adhesion response
+          description: famille response
           schema:
-            $ref: '#/definitions/HistoriqueAdhesion'
+            $ref: '#/definitions/Famille'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single historique adhesion based on the ID supplied
-      operationId: deleteHistoriqueAdhesion by id_ha
+      description: deletes a single famille based on the ID supplied
+      operationId: deleteFamille by id_famille
       parameters:
-        - name: id_ha
+        - name: id_famille
           in: path
-          description: ID of historique adhesion to delete
+          description: ID of famille to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: historique adhesion deleted
+          description: famille deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  HistoriqueAdhesion:
+  Famille:
     allOf:
-      - $ref: '#/definitions/NewHistoriqueAdhesion'
+      - $ref: '#/definitions/NewFamille'
       - required:
-        - id_ha
-        properties:
-          id_support:
-            type: integer
-            format: int64
-  NewHistoriqueAdhesion:
+        - id_famille
+  NewFamille:
     properties:
-      id_adhesion_ha:
-            type: integer
-            format: int64
-      date_adhesion_ha:
-        type: string
+      id_famille:
+          type: integer
+          format: int64 
   Error:
     required:
       - code
