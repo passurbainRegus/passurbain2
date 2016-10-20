@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Usager
+  description: Historique Usager
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /usager:
+  /historique_usager:
     get:
       description: |
-        Returns all usagers from the system that the user has access to 
-      operationId: findUsager
+        Returns all historique_usager's from the system that the user has access to 
+      operationId: findHistorique_Usager
       parameters:
         - name: tags
           in: query
@@ -42,105 +42,108 @@ paths:
           format: int32
       responses:
         200:
-          description: usager response
+          description: historique_usager response
           schema:
             type: array
             items:
-              $ref: '#/definitions/Usager'
+              $ref: '#/definitions/HistoriqueUsager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new usager.
-      operationId: addUsager
+      description: Creates a new historique_usager.
+      operationId: addHistoriqueUsager
       parameters:
-        - name: usager
+        - name: historique_usager
           in: body
-          description: Usager to add to the PU
+          description: HistoriqueUsager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewUsager'
+            $ref: '#/definitions/NewHistoriqueUsager'
       responses:
         200:
-          description: usager response
+          description: historique_usager response
           schema:
-            $ref: '#/definitions/Usager'
+            $ref: '#/definitions/HistoriqueUsager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /usager/{id_usager}:
+  /historique_usager/{id_hu}:
     get:
-      description: Returns a user based on a single ID, if the user does not have access to the usager
-      operationId: find usager by id_usager
+      description: Returns a historique_usager based on a single ID
+      operationId: find historique_usager by id_hu
       parameters:
-        - name: id_usager
+        - name: id_hu
           in: path
-          description: ID of usager to fetch
+          description: ID of historique_usager to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: usager response
+          description: historique_usager response
           schema:
-            $ref: '#/definitions/Usager'
+            $ref: '#/definitions/HistoriqueUsager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single usager based on the ID supplied
-      operationId: deleteUsager by id_usager
+      description: deletes a single historique_usager based on the ID supplied
+      operationId: deleteHistoriqueUsager by id_hu
       parameters:
-        - name: id_usager
+        - name: id_hu
           in: path
-          description: ID of usager to delete
+          description: ID of historique_usager to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: usager deleted
+          description: historique_usager deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Usager:
+  HistoriqueUsager:
     allOf:
-      - $ref: '#/definitions/NewUsager'
+      - $ref: '#/definitions/NewHistoriqueUsager'
       - required:
-        - id_usager
+        - id_hu
         properties:
-          id_usager:
+          id_hu:
             type: integer
             format: int64
-  NewUsager:
+  NewHistoriqueUsager:
     properties:
-      id_CUT_usager:
+      id_usager_hu:
         type: integer
         format: int64
-      nom_usager:
+      id_CUT_usager_hu:
+        type: integer
+        format: int64
+      no_usager_hu:
         type: string
-      prenom_usager:
+      prenom_usager_hu:
         type: string
-      adresse_email_usager:
+      adresse_email_usager_hu:
         type: string
-      sexe_usager:
+      sece_usager_hu:
         type: string
-      date_naissance_usager:
+      date_naissance_usager_hu:
         type: string
-      lieu_naissance_usager:
+      lieu_naissance_usager_hu_:
         type: string
-      pays_naissance_usager:
+      pays_naissance_usager_hu:
         type: string
-      nom_usage_usager:
+      nom_usage_usager_hu:
         type: string
-      adresse_postale_usager:
+      adresse_postale_usager_hu:
         type: string
-      numero_telephone_usager:
+      numero_telephone_usager_hu:
         type: string
   Error:
     required:
