@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Historique Adhesion
+  description: Usager
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /historique_adhesion:
+  /usager:
     get:
       description: |
-        Returns all historique adhesions from the system that the user has access to 
-      operationId: findHistoriqueAdhesion
+        Returns all usagers from the system that the user has access to 
+      operationId: findUsager
       parameters:
         - name: tags
           in: query
@@ -42,87 +42,105 @@ paths:
           format: int32
       responses:
         200:
-          description: demande historique adhesion response
+          description: usager response
           schema:
             type: array
             items:
-              $ref: '#/definitions/HistoriqueAdhesion'
+              $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new historique adhesion.
-      operationId: addHistoriqueAdhesion
+      description: Creates a new usager.
+      operationId: addUsager
       parameters:
-        - name: demande historique adhesion
+        - name: usager
           in: body
-          description: HistoriqueAdhesionto add to the PU
+          description: Usager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewHistoriqueAdhesion'
+            $ref: '#/definitions/NewUsager'
       responses:
         200:
-          description: demande support response
+          description: usager response
           schema:
-            $ref: '#/definitions/HistoriqueAdhesion'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /historique adhesion/{id_ha}:
+  /usager/{id_usager}:
     get:
-      description: Returns an historique adhesion support based on a single ID
-      operationId: find historique adhesion by id_ha
+      description: Returns a user based on a single ID, if the user does not have access to the usager
+      operationId: find usager by id_usager
       parameters:
-        - name: id_ha
+        - name: id_usager
           in: path
-          description: ID of historique adhesion to fetch
+          description: ID of usager to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: historique adhesion response
+          description: usager response
           schema:
-            $ref: '#/definitions/HistoriqueAdhesion'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single historique adhesion based on the ID supplied
-      operationId: deleteHistoriqueAdhesion by id_ha
+      description: deletes a single usager based on the ID supplied
+      operationId: deleteUsager by id_usager
       parameters:
-        - name: id_ha
+        - name: id_usager
           in: path
-          description: ID of historique adhesion to delete
+          description: ID of usager to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: historique adhesion deleted
+          description: usager deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  HistoriqueAdhesion:
+  Usager:
     allOf:
-      - $ref: '#/definitions/NewHistoriqueAdhesion'
+      - $ref: '#/definitions/NewUsager'
       - required:
-        - id_ha
+        - id_usager
         properties:
-          id_ha:
+          id_usager:
             type: integer
             format: int64
-  NewHistoriqueAdhesion:
+  NewUsager:
     properties:
-      id_adhesion_ha:
+      id_CUT_usager:
         type: integer
         format: int64
-      date_adhesion_ha:
+      nom_usager:
+        type: string
+      prenom_usager:
+        type: string
+      adresse_email_usager:
+        type: string
+      sexe_usager:
+        type: string
+      date_naissance_usager:
+        type: string
+      lieu_naissance_usager:
+        type: string
+      pays_naissance_usager:
+        type: string
+      nom_usage_usager:
+        type: string
+      adresse_postale_usager:
+        type: string
+      numero_telephone_usager:
         type: string
   Error:
     required:
