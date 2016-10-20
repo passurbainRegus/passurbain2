@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: (Referentiel) Etat support
+  description: (Referentiel) Etat demande
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /ref_etat_support:
+  /ref_etat_demande:
     get:
       description: |
-        Returns all etats supports from the system that the user has access to 
-      operationId: findEtatSupport
+        Returns all etats demandes from the system that the user has access to 
+      operationId: findEtatDemande
       parameters:
         - name: tags
           in: query
@@ -42,40 +42,40 @@ paths:
           format: int32
       responses:
         200:
-          description: etat support response
+          description: etat demande response
           schema:
             type: array
             items:
-              $ref: '#/definitions/EtatSupport'
+              $ref: '#/definitions/EtatDemande'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new etat support.
+      description: Creates a new etat demande.
       operationId: addEtatUsager
       parameters:
-        - name: etat support
+        - name: etat demande
           in: body
           description: EtatUsager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewEtatSupport'
+            $ref: '#/definitions/NewEtatDemande'
       responses:
         200:
-          description: etat support response
+          description: etat demande response
           schema:
-            $ref: '#/definitions/EtatSupport'
+            $ref: '#/definitions/EtatDemande'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /ref_etat_support/{id_etat_support}:
+  /ref_etat_demande/{id_etat_demande}:
     get:
-      description: Returns an etat support based on a single ID
-      operationId: find etat support by id_etat_support
+      description: Returns an etat demande based on a single ID
+      operationId: find etat demande by id_etat_demande
       parameters:
-        - name: id_etat_support
+        - name: id_etat_demande
           in: path
           description: ID of etat usager to fetch
           required: true
@@ -83,43 +83,43 @@ paths:
           format: int64
       responses:
         200:
-          description: support response
+          description: demande response
           schema:
-            $ref: '#/definitions/EtatSupport'
+            $ref: '#/definitions/EtatDemande'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single etat support based on the ID supplied
-      operationId: deleteEtatUsager by id_etat_support
+      description: deletes a single etat demande based on the ID supplied
+      operationId: deleteEtatUsager by id_etat_demande
       parameters:
-        - name: id_etat_support
+        - name: id_etat_demande
           in: path
-          description: ID of etat support to delete
+          description: ID of etat demande to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: etat support deleted
+          description: etat demande deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  EtatSupport:
+  EtatDemande:
     allOf:
-      - $ref: '#/definitions/NewEtatSupport'
+      - $ref: '#/definitions/NewEtatDemande'
       - required:
-        - id_etat_support
+        - id_etat_demande
         properties:
-          id_etat_support:
+          id_etat_demande:
             type: integer
             format: int64
-  NewEtatSupport:
+  NewEtatDemande:
     properties:
-      libelle_etat_support:
+      libelle_etat_demande:
         type: string
   Error:
     required:
