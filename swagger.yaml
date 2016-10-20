@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: (Referentiel) Etat usager
+  description: (Referentiel) Etat adhesion
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /ref_etat_usager:
+  /ref_etat_adhesion:
     get:
       description: |
-        Returns all etats usagers from the system that the user has access to 
-      operationId: findEtatUsager
+        Returns all etats adhesions from the system that the user has access to 
+      operationId: findEtatAdhesion
       parameters:
         - name: tags
           in: query
@@ -42,40 +42,40 @@ paths:
           format: int32
       responses:
         200:
-          description: etat usager response
+          description: etat adhesion response
           schema:
             type: array
             items:
-              $ref: '#/definitions/EtatUsager'
+              $ref: '#/definitions/EtatAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new etat usager.
+      description: Creates a new etat adhesion.
       operationId: addEtatUsager
       parameters:
-        - name: etat usager
+        - name: etat adhesion
           in: body
           description: EtatUsager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewEtatUsager'
+            $ref: '#/definitions/NewEtatAdhesion'
       responses:
         200:
-          description: etat usager response
+          description: etat adhesion response
           schema:
-            $ref: '#/definitions/EtatUsager'
+            $ref: '#/definitions/EtatAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /ref_etat_usager/{id_etat_usager}:
+  /ref_etat_adhesion/{id_etat_adhesion}:
     get:
-      description: Returns an etat usager based on a single ID
-      operationId: find etat usager by id_etat_usager
+      description: Returns an etat adhesion based on a single ID
+      operationId: find etat adhesion by id_etat_adhesion
       parameters:
-        - name: id_etat_usager
+        - name: id_etat_adhesion
           in: path
           description: ID of etat usager to fetch
           required: true
@@ -83,43 +83,43 @@ paths:
           format: int64
       responses:
         200:
-          description: agent response
+          description: adhesion response
           schema:
-            $ref: '#/definitions/EtatUsager'
+            $ref: '#/definitions/EtatAdhesion'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single etat usager based on the ID supplied
-      operationId: deleteEtatUsager by id_etat_usager
+      description: deletes a single etat adhesion based on the ID supplied
+      operationId: deleteEtatUsager by id_etat_adhesion
       parameters:
-        - name: id_etat_usager
+        - name: id_etat_adhesion
           in: path
-          description: ID of etat usager to delete
+          description: ID of etat adhesion to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: etat usager deleted
+          description: etat adhesion deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  EtatUsager:
+  EtatAdhesion:
     allOf:
-      - $ref: '#/definitions/NewEtatUsager'
+      - $ref: '#/definitions/NewEtatAdhesion'
       - required:
-        - id_etat_usager
+        - id_etat_adhesion
         properties:
-          id_etat_usager:
+          id_etat_adhesion:
             type: integer
             format: int64
-  NewEtatUsager:
+  NewEtatAdhesion:
     properties:
-      libelle_etat_usager:
+      libelle_etat_adhesion:
         type: string
   Error:
     required:
