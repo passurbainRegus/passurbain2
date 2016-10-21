@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Param Batch
+  description: Usager
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /param_batch:
+  /usager:
     get:
       description: |
-        Returns all param batch from the system that the user has access to 
-      operationId: findParamBatch
+        Returns all usagers from the system that the user has access to 
+      operationId: findUsager
       parameters:
         - name: tags
           in: query
@@ -42,86 +42,107 @@ paths:
           format: int32
       responses:
         200:
-          description: param batch response
+          description: usager response
           schema:
             type: array
             items:
-              $ref: '#/definitions/ParamBatch'
+              $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new param batch.
-      operationId: addParamBatch
+      description: Creates a new usager.
+      operationId: addUsager
       parameters:
-        - name: param batch
+        - name: usager
           in: body
-          description: ParamBatch to add to the PU
+          description: Usager to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewParamBatch'
+            $ref: '#/definitions/NewUsager'
       responses:
         200:
-          description: param batch response
+          description: usager response
           schema:
-            $ref: '#/definitions/ParamBatch'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /param_batch/{id_param}:
+  /usager/{id_usager}:
     get:
-      description: Returns an param batch based on a single ID
-      operationId: find param batch by id_param
+      description: Returns a user based on a single ID, if the user does not have access to the usager
+      operationId: find usager by id_usager
       parameters:
-        - name: id_param
+        - name: id_usager
           in: path
-          description: ID of param batch to fetch
+          description: ID of usager to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: param batch response
+          description: usager response
           schema:
-            $ref: '#/definitions/ParamBatch'
+            $ref: '#/definitions/Usager'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single param batch based on the ID supplied
-      operationId: deleteParamBatch by id_param
+      description: deletes a single usager based on the ID supplied
+      operationId: deleteUsager by id_usager
       parameters:
-        - name: id_param
+        - name: id_usager
           in: path
-          description: ID of param batch to delete
+          description: ID of usager to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: param batch deleted
+          description: usager deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  ParamBatch:
+  Usager:
     allOf:
-      - $ref: '#/definitions/NewParamBatch'
+      - $ref: '#/definitions/NewUsager'
       - required:
-        - id_param
+        - id_usager
         properties:
-          id_param:
+          id_usager:
             type: integer
             format: int64
-  NewParamBatch:
+  NewUsager:
     properties:
-      libelle_param:
+      id_CUT_usager:
+        type: integer
+        format: int64
+      nom_usager:
         type: string
-      valeur_param:
+      prenom_usager:
+        type: string
+      adresse_email_usager:
+        type: string
+      sexe_usager:
+        type: string
+      date_naissance_usager:
+        type: string
+      lieu_naissance_usager:
+        type: string
+      pays_naissance_usager:
+        type: string
+      nom_usage_usager:
+        type: string
+      adresse_postale_usager:
+        type: string
+      numero_telephone_usager:
+        type: string
+      personne_morale:
         type: string
   Error:
     required:
