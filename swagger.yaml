@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: 1.0.0
   title: PassUrbain
-  description: Historique DemandeSupport
+  description: Param Batch
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
@@ -20,11 +20,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /historique_demande_support:
+  /param_batch:
     get:
       description: |
-        Returns all historique demande supports from the system that the user has access to 
-      operationId: findHistoriqueDemandeSupport
+        Returns all param batch from the system that the user has access to 
+      operationId: findParamBatch
       parameters:
         - name: tags
           in: query
@@ -42,84 +42,86 @@ paths:
           format: int32
       responses:
         200:
-          description: historique demande support response
+          description: param batch response
           schema:
             type: array
             items:
-              $ref: '#/definitions/HistoriqueDemandeSupport'
+              $ref: '#/definitions/ParamBatch'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      description: Creates a new historique demande support.
-      operationId: addHistoriqueDemandeSupport
+      description: Creates a new param batch.
+      operationId: addParamBatch
       parameters:
-        - name: historique demande support
+        - name: param batch
           in: body
-          description: HistoriqueDemandeSupport to add to the PU
+          description: ParamBatch to add to the PU
           required: true
           schema:
-            $ref: '#/definitions/NewHistoriqueDemandeSupport'
+            $ref: '#/definitions/NewParamBatch'
       responses:
         200:
-          description: demande support response
+          description: param batch response
           schema:
-            $ref: '#/definitions/HistoriqueDemandeSupport'
+            $ref: '#/definitions/ParamBatch'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /historique_demande_support/{id_hds}:
+  /param_batch/{id_param}:
     get:
-      description: Returns an historique demande support based on a single ID
-      operationId: find historique demande support by id_hds
+      description: Returns an param batch based on a single ID
+      operationId: find param batch by id_param
       parameters:
-        - name: id_hds
+        - name: id_param
           in: path
-          description: ID of historique demande support to fetch
+          description: ID of param batch to fetch
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: historique demande support response
+          description: param batch response
           schema:
-            $ref: '#/definitions/HistoriqueDemandeSupport'
+            $ref: '#/definitions/ParamBatch'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single historique demande support based on the ID supplied
-      operationId: deleteHistoriqueDemandeSupport by id_hds
+      description: deletes a single param batch based on the ID supplied
+      operationId: deleteParamBatch by id_param
       parameters:
-        - name: id_hds
+        - name: id_param
           in: path
-          description: ID of historique demande support to delete
+          description: ID of param batch to delete
           required: true
           type: integer
           format: int64
       responses:
         204:
-          description: historique demande support deleted
+          description: param batch deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  HistoriqueDemandeSupport:
+  ParamBatch:
     allOf:
-      - $ref: '#/definitions/NewHistoriqueDemandeSupport'
+      - $ref: '#/definitions/NewParamBatch'
       - required:
-        - id_hds
+        - id_param
         properties:
-          id_hds:
+          id_param:
             type: integer
             format: int64
-  NewHistoriqueDemandeSupport:
+  NewParamBatch:
     properties:
-      date_hds:
+      libelle_param:
+        type: string
+      valeur_param:
         type: string
   Error:
     required:
